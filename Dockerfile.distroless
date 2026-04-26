@@ -1,0 +1,54 @@
+# syntax=docker/dockerfile:1
+#
+# Sovereign v10.1 Distroless runtime profile.
+#
+# Runtime intentionally has no shell, no package manager and no common debug
+# tools. Use Dockerfile for interactive/debuggable staging and this file for
+# hardened production images.
+#
+# Note: gcr.io/distroless/python3-debian12 tracks Debian's Python 3 runtime,
+# not python:3.12-slim exactly. Sovereign supports Python >=3.10 and has no
+# third-party dependencies, so this runtime remains compatible.
+
+FROM python:3.12-slim AS builder
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    SOVEREIGN_SANDBOX=distroless \
+    SOVEREIGN_WEB_DIR=/app/web
+
+WORKDIR /app
+
+RUN mkdir -p /app/var /app/uploads /app/static /app/web /tmp \
+ && chmod 1777 /tmp \
+ && chmod 0755 /app /app/var /app/uploads /app/static /app/web
+
+COPY pyproject.toml README.md SECURITY.md /app/
+COPY sovereign /app/sovereign
+COPY examples /app/examples
+COPY static /app/static
+COPY web /app/web
+COPY deploy /app/deploy
+
+# Distroless Python image ships a Python runtime but no shell/package manager.
+# The nonroot tag uses uid/gid 65532.
+FROM gcr.io/distroless/python3-debian12:nonroot AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    SOVEREIGN_SANDBOX=distroless \
+    SOVEREIGN_WEB_DIR=/app/web \
+    PYTHONPATH=/app
+
+WORKDIR /app
+
+COPY --from=builder --chown=65532:65532 /app /app
+
+USER 65532:65532
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD ["python3", "-c", "import urllib.request,sys; r=urllib.request.urlopen('http://127.0.0.1:8080/healthz',timeout=2); sys.exit(0 if 200<=r.status<500 else 1)"]
+
+ENTRYPOINT ["python3"]
+CMD ["-m", "examples.app", "--host", "0.0.0.0", "--port", "8080", "--static-dir", "/app/static", "--upload-dir", "/app/uploads", "--task-db", "/app/var/sovereign_tasks.sqlite3"]

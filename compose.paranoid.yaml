@@ -1,0 +1,35 @@
+services:
+  sovereign:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sovereign-server:v10.5-paranoid
+    ports:
+      - "8080:8080"
+    user: "10001:10001"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+      - seccomp=./deploy/docker/seccomp-paranoid.json
+    pids_limit: 256
+    mem_limit: 256m
+    cpus: 1.0
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+      - /app/var:rw,nosuid,nodev,uid=10001,gid=10001,mode=0700,size=128m
+      - /app/uploads:rw,nosuid,nodev,uid=10001,gid=10001,mode=0700,size=128m
+    environment:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUNBUFFERED: "1"
+      SOVEREIGN_WEB_DIR: /app/web
+      SOVEREIGN_SANDBOX: docker-paranoid-seccomp
+    command: ["python", "-m", "examples.app", "--host", "0.0.0.0", "--port", "8080", "--static-dir", "/app/static", "--upload-dir", "/app/uploads", "--task-db", "/app/var/sovereign_tasks.sqlite3"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; r=urllib.request.urlopen('http://127.0.0.1:8080/healthz',timeout=2); sys.exit(0 if 200<=r.status<500 else 1)"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped

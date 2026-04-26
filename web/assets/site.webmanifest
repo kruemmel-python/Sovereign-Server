@@ -1,0 +1,15 @@
+{
+  "name": "Sovereign HTML5 Runtime",
+  "short_name": "Sovereign",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08111f",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

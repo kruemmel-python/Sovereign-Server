@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Sovereign HTML5 Demo mit API, SPA-Fallback, PWA-Metadaten und gehärteten Security-Headern.">
+  <title>Sovereign HTML5 Runtime</title>
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <noscript>Diese Demo benötigt JavaScript für Status- und Formularinteraktionen.</noscript>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Sovereign Startseite">
+      <span class="brand-mark">S</span>
+      <span>Sovereign HTML5</span>
+    </a>
+    <nav aria-label="Hauptnavigation">
+      <a href="/">Home</a>
+      <a href="/dashboard">SPA Route</a>
+      <a href="/openapi.json">OpenAPI</a>
+      <a href="/__assets.json">Assets</a>
+    </nav>
+  </header>
+
+  <main id="app" class="shell">
+    <section class="hero">
+      <p class="eyebrow">Python Backend · HTML5 Frontend · Docker Sandbox</p>
+      <h1>Jetzt unterstützt Sovereign auch moderne HTML5-Apps.</h1>
+      <p class="lead">
+        Diese Seite wird als echte HTML5-App ausgeliefert: statische Assets, Module-JavaScript,
+        Manifest, Favicon, SPA-Deep-Links, API-Aufrufe, Security-Header und Asset-Manifest.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="/api/status">Status JSON</a>
+        <button class="button" id="refresh-status" type="button">Status neu laden</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Runtime Status</h2>
+        <dl class="status-list" id="status">
+          <div><dt>Status</dt><dd>Lade…</dd></div>
+        </dl>
+      </article>
+
+      <article class="card">
+        <h2>Validierte API-Demo</h2>
+        <p>Sende Daten an <code>/api/contact</code>. Das Backend validiert den Body per Dataclass.</p>
+        <form id="contact-form">
+          <label>
+            Name
+            <input name="name" value="Ada" autocomplete="name" required>
+          </label>
+          <label>
+            Nachricht
+            <textarea name="message" rows="4" required>Sovereign rendert HTML5 und spricht JSON.</textarea>
+          </label>
+          <button class="button primary" type="submit">Absenden</button>
+        </form>
+        <pre id="result" class="result">Noch keine Anfrage gesendet.</pre>
+      </article>
+
+      <article class="card">
+        <h2>HTML5 Features</h2>
+        <ul class="checks">
+          <li>SPA-Fallback für Deep Links</li>
+          <li>ES Modules via <code>type="module"</code></li>
+          <li>PWA-Manifest und SVG-Favicon</li>
+          <li>Range Requests und ETags für Assets</li>
+          <li>Gzip-Kompression für Textassets</li>
+          <li>Strikte CSP ohne Inline-Scripts</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

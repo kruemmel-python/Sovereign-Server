@@ -1,0 +1,10 @@
+[project]
+name = "sovereign-server"
+version = "10.4.0"
+description = "Dependency-minimal Python HTTP framework with async core, validation, security modules and paranoid Docker sandbox profile, optional distroless runtime and bundled demo website"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sovereign*"]
