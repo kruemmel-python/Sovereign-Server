@@ -26,9 +26,9 @@ http://localhost:8080/
 | /api/status (English) | Runtime-/Sandbox-Status as JSON |
 | /api/contact | Validated POST Demo |
 | /healthz | Docker Healthcheck |
-| /openapi.json | OpenAPI Skeleton |
+| /openapi.json | OpenAPI-Skeleton |
 
-## POST Demo
+## POST-Demo
 
 ```powershell
 Invoke-RestMethod `

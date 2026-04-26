@@ -1,52 +1,52 @@
-# LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+# Sovereign Server V10 Professional
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Minimalist Python HTTP/1.1 Framework and Server using only the Python standard library.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## V10 Add-ons
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `Router.execute_async()` `asyncio.run()`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `SandboxPolicy` `validate_runtime_environment()`
+- **Paranoid Docker Sandbox**: non-root, read-only rootfs, dropped capabilities, no-new-privileges, seccomp profile, PID/CPU/RAM limits, and tmpfs-only writable paths.
+- **Async-Middleware Pipeline without Nested Event Loops**: `Router.execute_async()` no longer uses the `asyncio.run()` bridge. Sync-middlewares are explicitly promoted into the awaitable chain.
+- **Runtime Sandbox Diagnostics**: `SandboxPolicy`, `validate_runtime_environment()`, and dependency-free Docker Healthcheck helper.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Paranoid Docker Start
 
 ```bash
 docker compose build
 docker compose up
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `SANDBOX.md`
+More details available in `SANDBOX.md`.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## V7 Add-ons
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `Inject(provider)`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `kid` `iss` `aud`
+- **In-Memory TestClient** for unit tests without TCP sockets.
+- **Dependency Injection** with `Inject(provider)` in handler signatures.
+- **Standard Middlewares**: CORS and CSRF protection.
+- **Native async/await Handler** over secure coroutine detection.
+- **Persistent Background Tasks** using SQLite Queue with retry logic.
+- **WebSocket Head-of-Line Blocking Protection** via per-session send queues with limits.
+- **Absolute Request-Timeouts** in addition to Idle-Timeouts.
+- **JWT Hardening**: `kid` Key Rotation, strict algorithm validation, token length limit, `iss`/`aud`.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Start
 
 ```bash
 python -m examples.app --host 127.0.0.1 --port 8080
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Or:
 
 ```bash
 python -m sovereign.cli
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Tests
 
 ```bash
 python -m unittest discover -s tests
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Example: TestClient
 
 ```python
 from examples.app import router, jwt
@@ -58,25 +58,25 @@ resp = client.get("/users", headers={"authorization": f"Bearer {token}"})
 assert resp.status_code == 200
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Security Warning
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+This package is dependency-minimal and auditable, but external security reviews, fuzzing, load testing, and OS-level hardening are required before direct internet operation.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Sovereign v8 Extensions
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+This build includes the requested production hardening and framework extensions:
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `validate_body()` `validate_query()`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `GET /openapi.json` `GET /docs`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `transient` `request_scoped` `scoped` `singleton`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `GZipMiddleware` `CompressionMiddleware`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `rate_limit()`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `SQLiteJWTBlocklist` `jti` `SQLiteTaskQueue`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `ServerConfig.tls_handshake_timeout`
+- Request validation via `validate_body()` and `validate_query()` using dataclasses/typing.
+- Automatic OpenAPI skeleton at `GET /openapi.json` and `GET /docs`.
+- Dependency injection lifecycles: `transient`, `request_scoped`/`scoped`, and `singleton`.
+- Transparent `GZipMiddleware` and `CompressionMiddleware` for gzip/deflate responses, including static responses when routed through the server.
+- Token-bucket rate limiting via `rate_limit()` with in-memory or SQLite storage.
+- WebSocket presence tracking, typed event broadcasting, user session lookup, and active ping/pong heartbeat shutdown.
+- Fail-closed response header validation against CRLF injection.
+- JWT revocation using `SQLiteJWTBlocklist`, automatic `jti` issuance, and cleanup helpers for `SQLiteTaskQueue`.
+- Strict TLS handshake timeout via `ServerConfig.tls_handshake_timeout`.
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Minimal example:
 
 ```python
 import dataclasses
@@ -102,29 +102,29 @@ def create_user(req, db=Inject(get_db)):
     return JSONResponse({"name": user.name, "age": user.age})
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## This package includes eight additional production-oriented modules:
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+This package includes eight additional production-oriented modules:
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `AsyncSovereignServer` `asyncio.to_thread()`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `EventHub` `hub.sse("room")` `SSEResponse`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sovereign.orm` `Model` `SQLiteORM.insert/save/get/query`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sovereign.acme`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sovereign.template` `TemplateResponse` `safe()`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sovereign.crypto` `hashlib.scrypt`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sovereign.multipart`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `bruteforce_protect`
+- `AsyncSovereignServer`: asyncio-native HTTP/1.1 mode with direct awaiting of async route handlers and `asyncio.to_thread()` isolation for sync handlers.
+- `EventHub`: unified WebSocket/SSE room, user, and presence hub. `hub.sse("room")` returns an `SSEResponse`; WebSockets and SSE receive the same broadcasts.
+- sovereign.orm: dependency-free dataclass SQLite ORM with `Model`, `SQLiteORM.insert/save/get/query`.
+- `sovereign.acme`: ACME HTTP-01 challenge installer, challenge storage, OpenSSL key/CSR helpers, and certificate-manager scaffolding for dependency-free Let's Encrypt integration.
+- `sovereign.template`: Tiny auto-escaping template engine with `TemplateResponse`; values must be explicitly marked with `safe()` to bypass escaping.
+- `sovereign.crypto`: Secure password hashing via `hashlib.scrypt`, random salts, and timing-safe verification.
+- `sovereign.multipart`: Bounded multipart parser with strict part/file/file-size limits and magic-byte MIME checks.
+- `bruteforce_protect`: SQLite-backed adaptive tarpit/fail2ban middleware for login endpoints.
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sovereign.__init__`
+All additions use only the Python standard library and are exported from `sovereign.__init__`.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## v10.1 Distroless production image
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `Dockerfile.distroless` `compose.distroless.yaml` `DISTROLESS.md`
+Use `Dockerfile.distroless` and `compose.distroless.yaml` for a shell-less, package-manager-less production runtime. See `DISTROLESS.md`.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Demo Website
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `docker compose up --build` `http://localhost:8080/` `WEBSITE.md`
+Start the container with `docker compose up --build` and open `http://localhost:8080/` afterward. Details are in `WEBSITE.md`.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## HTML5 Runtime
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `web/` `/assets/...` `HTML5.md`
+v10.5 can deliver complete HTML5 frontends from the `web/` directory: `/assets/...`, SPA fallback, ETags, Range Requests, gzip, PWA manifest, and strict browser security headers. See `HTML5.md`.

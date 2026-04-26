@@ -1,17 +1,17 @@
-# LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+# Security Notes
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+V7 includes additional security mechanisms:
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `kid`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+- Absolute request deadlines to mitigate Slowloris variants.
+- Chunked request parsing with a global body limit.
+- WebSocket broadcasts no longer block globally on slow clients.
+- JWT supports key rotation via `kid`.
+- CORS and CSRF are implemented as middleware.
+- Persistent background tasks use SQLite transactions.
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Not included:
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+- HTTP/2/3.
+- Custom cryptography beyond HS256-HMAC.
+- Complete multipart streaming parser.
+- External Distributed Cache / Redis Cluster

@@ -1,8 +1,8 @@
-# LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+# Docker Runtime Storage
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Sovereign's hardened Docker profiles run with a read-only root filesystem. SQLite databases, uploads, and temporary runtime state must live on explicitly mounted writable paths.
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+`compose.yaml` mounts `/app/var` and `/app/uploads` as tmpfs owned by the non-root runtime UID. This keeps the default demo stateless and safe for local testing.
 
 ```text
 --task-db /app/var/sovereign_tasks.sqlite3
@@ -10,14 +10,14 @@ LM Studio provider could not reach the local server. Start LM Studio Server and 
 --static-dir /app/static
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `compose.yaml` `/app/var` `/app/uploads`
+For durable production state, replace the `/app/var` tmpfs entry with a named volume or host bind mount and keep ownership compatible with the runtime user:
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/app/var`
+For durable production state, replace the `/app/var` tmpfs entry with a named volume or host bind mount and keep ownership compatible with the runtime user:
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `10001`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `65532`
+- slim profile: uid/gid `10001`
+- distroless profile: uid/gid `65532`
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Example:
 
 ```yaml
 volumes:
@@ -29,5 +29,6 @@ services:
       - sovereign-var:/app/var
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `sqlite3.OperationalError: unable to open database
-file` `tmpfs` `volumes` `command`
+If Docker Desktop reports `sqlite3.OperationalError: unable to open database
+file`, the task database path is not writable by the non-root container user.
+Check the `tmpfs`, `volumes` and `command` entries in your compose file.

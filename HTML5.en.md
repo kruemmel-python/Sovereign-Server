@@ -1,19 +1,19 @@
-# LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+# Sovereign HTML5 Runtime
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Sovereign can, starting from v10.5, deliver not only Python APIs but complete HTML5 frontends.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Features
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `web/`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/assets/...`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/dashboard/settings`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `ETag` `Last-Modified` `Accept-Ranges`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/__assets.json`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `SOVEREIGN_WEB_DIR=/app/web`
+- HTML5 files from the `web/` directory
+- /assets/... for CSS, JavaScript, SVG, Manifest, WASM, and Fonts
+- SPA fallback for deep links like /dashboard/settings
+- ETag, Last-Modified, Accept-Ranges, and Range Requests
+- Gzip compression for text assets
+- Asset Manifest at `/__assets.json`
+- Strict Browser Security Headers including CSP
+- Docker-ready via `SOVEREIGN_WEB_DIR=/app/web`
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Usage
 
 ```python
 from pathlib import Path
@@ -30,7 +30,7 @@ HTML5App(
 ).mount(router)
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Docker
 
 ```powershell
 docker compose down --remove-orphans --volumes
@@ -38,15 +38,15 @@ docker compose build --no-cache
 docker compose up
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Then open:
 
 ```text
 http://localhost:8080/
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Paranoid Defaults
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+This demo does not use inline scripts. This allows the Content Security Policy to remain strict:
 
 ```text
 script-src 'self'
@@ -55,4 +55,4 @@ object-src 'none'
 frame-ancestors 'none'
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+For external CDNs or inline code, the CSP must be intentionally expanded.

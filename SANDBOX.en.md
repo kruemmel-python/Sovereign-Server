@@ -5,58 +5,60 @@ This profile assumes the application is hostile until proven otherwise. It is me
 ## Controls
 
 - non-root user `10001:10001`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `cap_drop: [ALL]`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `no-new-privileges:true`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `tmpfs`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+- read-only root filesystem
+- `cap_drop: [ALL]`
+- no-new-privileges:true
+- explicit seccomp profile
+- memory, CPU, and PID limits
+- tmpfs only for writable runtime paths
+- no package manager or shell required by the app process
+- dependency-free health check
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Run
 
 ```bash
 docker compose build
 docker compose up
 ```
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Writable paths
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+The container root filesystem is read-only. Runtime writes must go to: **`/tmp`**
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/tmp`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/app/var`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/app/uploads`
+- `/tmp`
+- `/app/var`
+- `/app/uploads`
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `/app/var`
+For persistent SQLite files, mount a named volume or host directory to
+`/app/var` and keep the container root read-only.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Runtime self-check
 
 ```python
 from sovereign.sandbox import validate_runtime_environment
 facts = validate_runtime_environment()
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `strict=True`
+Use `strict=True` in admin-only diagnostics when you want startup to fail if
+the process is running as root, seccomp is disabled, or the root filesystem is writable.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Distroless production profile
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+For the final black-box production mode, use the distroless profile:
 
 ```bash
 docker compose -f compose.distroless.yaml build
 docker compose -f compose.distroless.yaml up
 ```
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+Files:
 
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `Dockerfile.distroless`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `compose.distroless.yaml`
-- LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `DISTROLESS.md`
+- `Dockerfile.distroless`
+- `compose.distroless.yaml`
+- `DISTROLESS.md`
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+The distroless runtime has no shell, no package manager, and no normal debug tools. This reduces post-exploitation options, but it is intentionally harder to inspect at runtime. Use the slim profile for staging/debugging and distroless for production promotion.
 
-## LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request
+## Docker Desktop compatibility
 
-LM Studio provider could not reach the local server. Start LM Studio Server and set, for example: $env:TOKENMARK_LMSTUDIO_BASE_URL='http://127.0.0.1:1234/v1'. Original error: HTTP Error 400: Bad Request `DOCKER_DESKTOP.md` `compose.yaml` `compose.paranoid.yaml`
+See `DOCKER_DESKTOP.md`. Since v10.2, `compose.yaml` is the Docker Desktop-safe profile, and `compose.paranoid.yaml` enables the extra-strict custom seccomp allowlist.
